@@ -8,6 +8,10 @@ server {
         access_log /var/log/nginx/lychee.access.log;
         error_log /var/log/nginx/lychee.error.log;
 
+         location /picture-gallery {
+                    index  index.php index.html index.htm;
+         }
+
         location / {
             index  index.php index.html index.htm;
         }
@@ -23,7 +27,10 @@ server {
             fastcgi_pass unix:/var/run/php5-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
+            fastcgi_param HTTPS 'on';
         }
         
         include php.conf;
 }
+
+
