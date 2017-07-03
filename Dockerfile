@@ -47,7 +47,8 @@ RUN git clone https://github.com/electerious/Lychee.git lychee
 
 RUN mkdir /var/www/lychee/uploads_init
 
-RUN chown -R www-data:www-data /var/www/lychee && \
+RUN ln -s /var/www/lychee /var/www/lychee/picture-gallery && \
+    chown -R www-data:www-data /var/www/lychee && \
     chmod -R 770 /var/www/lychee && \
     chmod -R 777 /var/www/lychee/uploads && \
     chmod -R 777 /var/www/lychee/data  && \
