@@ -23,11 +23,7 @@ RUN service mysql start && \
 RUN mkdir /var/lib/mysql_init && \
     mv /var/lib/mysql/* /var/lib/mysql_init
 
-RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = ${PHP_MAX_UPLOAD}/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = ${PHP_MAX_UPLOAD}/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s:;\s*session.save_path\s*=\s*\"N;/path\":session.save_path = /tmp:g" /etc/php5/fpm/php.ini
+ADD conf/php.ini /etc/php5/fpm/
 RUN chown -R www-data:www-data /tmp
 RUN php5enmod mcrypt
 
@@ -36,9 +32,7 @@ RUN mkdir /var/www && \
     rm /etc/nginx/sites-enabled/* && \
     rm /etc/nginx/sites-available/*
 
-RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 30/" /etc/nginx/nginx.conf
-RUN sed -i -e"s/keepalive_timeout 30/keepalive_timeout 30;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+ADD conf/nginx.conf /etc/nginx/
 ADD conf/php.conf /etc/nginx/
 ADD conf/lychee /etc/nginx/sites-enabled/
 
