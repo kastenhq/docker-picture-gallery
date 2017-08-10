@@ -2,6 +2,7 @@
 
 if [ ! -e /var/www/lychee/uploads/import ]
 then
+  ln -s /var/www/lychee /var/www/lychee/picture-gallery
   chown -R www-data:www-data /var/www/lychee
   mv -n /var/www/lychee/uploads_init/* /var/www/lychee/uploads/
   ls -l /var/www/lychee/uploads/
