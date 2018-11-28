@@ -14,7 +14,7 @@ then
 
   for i in {1..12}
   do
-    wget https://deis.com/images/blog-images/kubernetes-illustrated-guide-illustration-$i.png -O /uploads/import/Phippy_$i.png
+    wget https://web.archive.org/web/20160706015427im_/https://deis.com/images/blog-images/kubernetes-illustrated-guide-illustration-$i.png -O /uploads/import/Phippy_$i.png
   done
 
   cat > /data/config.php_tmp <<'LYCEECNFG'
